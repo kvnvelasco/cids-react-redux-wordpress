@@ -31,7 +31,6 @@ const getNextPage = (postAPI, page) => {
       }
     })
     .then( response => {
-      console.log(response)
       if(response.data.length == 0){dispatch({type: 'CAN_NEXT', payload: false})}
       else {
         dispatch({type: 'FETCHED_NEXT', payload: parsePost(response.data)})

@@ -77,40 +77,40 @@ a {
     float: left;
   }
 }
-//
-// .top-bar.up-nav {
-//   background: #800000;
-//   font-size: 14px;
-//   height: 2rem;
-//
-//   .top-bar-section {
-//     margin: 0 30px;
-//   }
-//
-//   .title-area {
-//     height: 2rem;
-//     width: 150px;
-//     background-image: url('../img/upd.png');
-//     background-position: center center;
-//     background-repeat: no-repeat;
-//     background-size: contain;
-//   }
-//
-//   ul {
-//     position: relative !important;
-//     min-width: 400px;
-//   }
-//
-//   a {
-//     line-height: 2rem !important;
-//     font-size: 12px !important;
-//     padding: 0 0.63333rem !important;
-//     background: #800000 !important;
-//     color: white;
-//
-//     &:hover {
-//       background: darken(#800000, 5%) !important;
-//       color: white !important;
-//     }
-//   }
-// }
+
+.top-bar.up-nav {
+  background: #800000;
+  font-size: 14px;
+  height: 2rem;
+
+  .top-bar-section {
+    margin: 0 30px;
+  }
+
+  .title-area {
+    height: 2rem;
+    width: 150px;
+    background-image: url('../img/upd.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  ul {
+    position: relative !important;
+    min-width: 400px;
+  }
+
+  a {
+    line-height: 2rem !important;
+    font-size: 12px !important;
+    padding: 0 0.63333rem !important;
+    background: #800000 !important;
+    color: white;
+
+    &:hover {
+      background: darken(#800000, 5%) !important;
+      color: white !important;
+    }
+  }
+}

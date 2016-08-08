@@ -61,6 +61,10 @@ export default class Base extends Component {
 
   }
 
+  menuClosed(state) {
+    if (!state.isOpen ) { this.props.dispatch({type: '_MENU', payload: false}) }
+  }
+
   backMenu() {
     this.props.dispatch({type: 'BACK_MENU'})
   }
@@ -71,7 +75,7 @@ export default class Base extends Component {
     switch (this.props.loaded) {
       case true:
         return  <div style={{paddingBottom: '50px'}} id="outer-container">
-                    <Menu pageWrapId={ "cids-page" } left  outerContainerId={ "outer-container" }
+                    <Menu pageWrapId={ "cids-page" } left  outerContainerId={ "outer-container" } onStateChange={this.menuClosed.bind(this)}
                     isOpen={this.props.menus.open} customBurgerIcon={false} customCrossIcon={ false }>
                       {back}
                       <ul>
