@@ -49,7 +49,7 @@ export default class HorizontalMenu extends Component{
 
   render() {
     let navigation = this.parseMenu(this.props.menu.items)
-    return   <ul key={this.props.menu.id}>
+    return   <ul key={this.props.menu.id} class={this.props.position}>
                 {navigation}
               </ul>
 

@@ -1,5 +1,7 @@
 import Base from './screens/base'
 import Home from './components/smart/home'
+import Post from './components/smart/post'
+import Page from './components/smart/page'
 
 const componentFetcher = (cb) =>{
   return (module) => cb(null, module.default)
@@ -7,33 +9,17 @@ const componentFetcher = (cb) =>{
 
 const routes = [
   {
-    path: 'home',
+    path: 'home(/:page)',
     component: Home
   },
   {
     path: 'articles/(:slug)(/:index)',
-    getComponent: (next, cb) => {
-      require.ensure([], (require) => {
-        cb(null, require('./components/smart/post').default)
-      })
-    }
-  },
-  {
-    path: 'about',
-    getComponent: (next, cb) => {
-      require.ensure([], (require) => {
-        cb(null, require('./components/about').default)
-      })
-    }
+    component: Post
   },
   {
     path: '(**/):pageId',
-    getComponent: (next, cb) => {
-      require.ensure([], (require) => {
-        cb(null, require('./components/smart/page').default)
-      })
-    }
-  },
+    component: Page
+  }
 ]
 
 export default [

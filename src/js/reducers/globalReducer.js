@@ -15,25 +15,8 @@ export default function reducer(state = {loaded: false, menus: {}}, action) {
         posts: action.payload.postAPI
       }
 
-    case 'GETTING_MENU':
-      pending++
-      return {...state,
-        menus: {...menus, pending: pending}}
-
-    case 'GOT_MENU':
-      let data = state.menus.data || []
-      let loaded = state.loaded || false
-      pending--
-      if(pending == 0) {loaded = true}
-      data.push(action.payload)
-
-      return {...state,
-        menus: {...menus, data: data, pending: pending},
-        loaded: loaded
-      }
-
     case 'READY':
-      return {...state, loaded: true}
+      return {...state, loaded: true, bootstrapped: true}
     default:
       return state
   }

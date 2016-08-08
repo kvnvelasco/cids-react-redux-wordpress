@@ -18,7 +18,6 @@
 }
 
 #main-banner {
-  height: 200px;
   padding: 40px;
   text-align: center;
   background: white;
@@ -28,6 +27,12 @@
 	  margin-top: 10px;
 		font-weight: 200;
 		font-size: 24px;
+	}
+
+	p {
+		max-width: 800px;
+		padding: 0 20px;
+		margin: auto;
 	}
 
 	.up-logo-large {
@@ -56,6 +61,15 @@
 	font-weight: 300;
 }
 
+.home-page {
+	h4 {
+		font-size: 24px;
+		font-family: 'Alegreya SC';
+		font-weight: 200;
+	}
+}
+
+
 
 
 .home-posts {
@@ -65,6 +79,37 @@
 		font-size: 20px;
 		line-height: 30px;
 		margin-bottom: 10px;
+
+		transition: color 0.2s;
+		color: inherit;
+
+		&:hover {
+			text-decoration: underline;
+			color: #800000;
+		}
+
+	}
+
+	.posts-enter:not(.uil-ring-css) {
+		position: relative;
+		top: 10px;
+  	opacity: 0.00;
+	}
+
+
+	.posts-enter.posts-enter-active:not(.uil-ring-css) {
+		top: 0px;
+		opacity: 1;
+	  transition: opacity 300ms ease-in, top 300ms linear;
+	}
+
+	.posts-leave{
+	  opacity: 1;
+	}
+
+	.posts-leave.posts-leave-active {
+	  opacity: 0.00;
+	  transition: opacity 300ms ease-in, top 300ms linear;
 	}
 
 	.date {
@@ -72,23 +117,37 @@
 		color: transparentize($paragraph-color, 0.5);
 	}
 
-	.post-preview p {
-		color: transparentize($paragraph-color, 0.5);
-		font-size: 14px;
-
+	.post-preview  {
+		p {
+			color: transparentize($paragraph-color, 0.5);
+			font-size: 14px;
+			}
+		a > span {
+			font-size: 14px;
+			color: #800000;
+			text-decoration: underline;
+		}
 	}
 }
 
 .sidebar_wrapper {
-	background-color: #800000;
+	background-color: #0a4424;
 	padding: 30px;
 	color: white;
+
+	h4 {
+		font-size: 24px;
+		font-family: 'Alegreya SC';
+		font-weight: 200;
+	}
+
 	.post-title h3 {
 		font-family: 'Alegreya SC';
 		font-weight: 200;
 		font-size: 16px;
 		line-height: 30px;
 		margin-bottom: 10px;
+
 	}
 
 	.date {
@@ -100,5 +159,31 @@
 		color: transparentize(white, 0.5);
 		font-size: 14px;
 	}
+}
 
+.pagination {
+	position: absolute;
+	right: 0;
+	div {
+		display: inline-block;
+		padding: 0 20px;
+		color: #434343;
+		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+@media (max-width: '650px') {
+	.top-bar {
+		display: none;
+	}
+}
+
+@media print {
+	.top-bar {
+		display: none;
+	}
 }

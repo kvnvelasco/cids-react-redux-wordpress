@@ -16,7 +16,7 @@ module.exports = {
       path.join(source, 'js/app.js')
     ],
     vendor: [
-        'react', 'react-dom'
+        'react', 'react-dom', 'react-burger-menu', 'radium'
     ]
   },
 
@@ -96,7 +96,7 @@ module.exports = {
 
     new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-    
+
     }),
   ]
 }

@@ -1,25 +1,36 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router'
+import { connect } from 'react-redux'
+// import HorizontalMenu from '../dumb/horizontalMenu'
 
-import HorizontalMenu from '../dumb/horizontalMenu'
+import { openMenu } from '../../actions/menuActions'
 
+@connect(store => {
+  return {
+    menus: store.menus
+  }
+})
 export default class Header extends Component{
   constructor() {
     super()
   }
-  render() {
-    const topMenu = this.props.menus.data.filter( item => item.slug == 'top' ? true : false)[0]
-    const mainMenu = this.props.menus.data.filter( item => item.slug == 'primary' ? true : false)[0]
-    return <div>
-        <nav class='top-bar'>
-          <div class='title-area'>
-            <Link to='/' >
-              <div class="up-logo-top " />
-            </Link>
 
-          </div>
-          <div class="top-bar-section">
-            <HorizontalMenu menu={topMenu} />
+  openBurger() {
+    this.props.dispatch(openMenu())
+  }
+
+  render() {
+    // const topMenu = this.props.menus.data.filter( item => item.slug == 'top' ? true : false)[0]
+    // const mainMenu = this.props.menus.data.filter( item => item.slug == 'primary' ? true : false)[0]
+    return <div>
+        <nav class='top-bar up-nav'>
+
+          <div class="top-bar-section ">
+            {/* <HorizontalMenu menu={topMenu} position='right'/> */}
+            <ul class='left'>
+              <div class='title-area'>
+              </div>
+            </ul>
           </div>
         </nav>
 
@@ -30,22 +41,18 @@ export default class Header extends Component{
           <Link to='/' >
             <h3> Center for Integrative Development Studies </h3>
           </Link>
+            <p> The University of the Philippines-Center for Integrative and Development Studies (UP-CIDS) spans various perspectives,
+            methodologies, and ideologies in its conduct of basic and policy-oriented research. The Center harnesses
+            the University’s multidisciplinary expertise in its studies on critical fields. </p>
         </div>
       </header>
-      <nav class='top-bar nav-primary' style={{height: 'auto'}}>
-        <ul class='title-area'>
-          <li class='toggle-topbar menu-icon'>
-            <a> Menu</a>
-          </li>
-        </ul>
-        <div class='container'>
-          <section class="top-bar-section" >
-            <div>
-              <HorizontalMenu menu={mainMenu} strip={true}/>
-            </div>
-          </section>
+      <nav class='nav-primary row small-collapse'>
+        <div class='columns small-1'> <Link to='/'><div class='home-button'> {' '} </div> </Link> </div>
+        <div onClick={this.openBurger.bind(this)} class='columns small-6 medium-3 large-2 end'>
+          <div class='menu-button'> Menu </div>
         </div>
       </nav>
+
     </div>
   }
 }

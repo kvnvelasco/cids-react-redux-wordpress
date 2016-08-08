@@ -6,7 +6,7 @@ services:
         context: .
       cpu_shares: 256
       volumes:
-        - constructor_data:/cids_sep
+        - constructor_data:/cids
         - .:/cids/development
         - constructor_modules:/cids/development/node_modules
         - constructor_modules:/cids/development/bower_components

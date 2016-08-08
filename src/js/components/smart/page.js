@@ -29,7 +29,8 @@ export default class Page extends Component {
       case true:
         return <div class='uil-ring-css' style={{top: '50px'}}><div></div></div>
       case false:
-        return <div style={{maxWidth: '960px', margin: 'auto'}} >
+        return <div style={{maxWidth: '960px', margin: 'auto'}} class='page'>
+
           <h1 dangerouslySetInnerHTML={{__html: this.props.page.title.rendered}}/>
           <div dangerouslySetInnerHTML={{__html: this.props.page.content.rendered}} />
         </div>

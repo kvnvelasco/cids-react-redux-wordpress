@@ -1,13 +1,42 @@
 import axios from 'axios'
 import moment from 'moment'
 
-export const fetchPosts = (postAPI) => {
+export const fetchPosts = (postAPI, page) => {
   return dispatch => {
-    dispatch({type: 'FETCHING_POSTS'})
-    axios.get(postAPI)
-    .then( response => {
+    dispatch({type: 'FETCHING_POSTS'}, page)
+    if(page == 1) { dispatch({type: 'CAN_PREV', payload: false}) }
+    else { dispatch({type: 'CAN_PREV', payload: true}) }
 
-      dispatch({type: 'FETCHED_POSTS', payload: parsePost(response.data, dispatch) })
+    axios.get(postAPI, {
+      params: {
+        page: page || 1
+      }
+    })
+    .then( response => {
+      dispatch({type: 'FETCHED_POSTS', payload: {data: parsePost(response.data, dispatch), page: page} })
+      dispatch(getNextPage(postAPI, page))
+    })
+    .catch( err => {
+      console.error('FAILED TO FETCH POSTS', err)
+    })
+  }
+}
+
+const getNextPage = (postAPI, page) => {
+  return dispatch => {
+    dispatch({type: 'FETCHING_NEXT', payload: page})
+    axios.get(postAPI, {
+      params: {
+        page: page + 1
+      }
+    })
+    .then( response => {
+      console.log(response)
+      if(response.data.length == 0){dispatch({type: 'CAN_NEXT', payload: false})}
+      else {
+        dispatch({type: 'FETCHED_NEXT', payload: parsePost(response.data)})
+        dispatch({type: 'CAN_NEXT', payload: true})
+      }
     })
   }
 }
@@ -25,6 +54,9 @@ export const fetchPost = (api, slug) => {
         dispatch({type: 'FETCHED_POST', payload: null})
       }
     })
+    .catch( err => {
+      console.error('FAILED TO FETCH POST', err)
+    })
   }
 }
 
@@ -38,6 +70,9 @@ export const fetchAnnouncements = (api) => {
         dispatch(fetchAnnouncePosts(url))
       }
     })
+    .catch( err => {
+      console.error('FAILED TO FETCH ANNOUNCE', err)
+    })
   }
 }
 
@@ -46,6 +81,9 @@ const fetchAnnouncePosts = (api) => {
     axios.get(`${api}&per_page=4`)
     .then( response => {
       dispatch({type: 'FETCHED_ANNOUNCE', payload: parsePost(response.data, dispatch) })
+    })
+    .catch( err => {
+      console.error('FAILED TO FETCH ANNOUNCE DOWNSTREAM', err)
     })
   }
 }
@@ -56,17 +94,15 @@ const getMedia = (id, mediaID) => {
     .then( response => {
       dispatch({type: 'GOT_FEATURED_MEDIA', payload: {id: id, media: response.data.media_details.sizes}})
     })
+    .catch( err => {
+      console.error('FAILED TO FETCH MEDIA', err)
+    })
   }
 }
 
 
-const parsePost = (data, dispatch) => {
+export const parsePost = (data) => {
   let posts = data.map( post => {
-    // check if featured media
-    if (post.featured_media != 0) {
-      dispatch(getMedia(post.id, post.featured_media))
-    }
-
     return {
       id: post.id,
       slug: post.slug,

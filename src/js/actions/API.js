@@ -38,7 +38,7 @@ const getMenu = (menu) => {
       dispatch({type: 'GOT_MENU', payload: response.data})
     })
     .catch( response => {
-      console.error('Get Menu Failed')
+      console.error('Get Menu Failed', response)
     })
   }
 }

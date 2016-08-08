@@ -10,7 +10,8 @@
   "author": "Kevin Velasco",
   "license": "ISC",
   "devDependencies": {
-    "clean-webpack-plugin": "^0.1.10"
+    "clean-webpack-plugin": "^0.1.10",
+    "flow-bin": "^0.30.0"
   },
   "dependencies": {
     "axios": "^0.12.0",
@@ -33,13 +34,17 @@
     "json-loader": "^0.5.4",
     "moment": "^2.14.1",
     "nuka-carousel": "^2.0.2",
+    "radium": "^0.18.1",
     "raw-loader": "^0.5.1",
     "react": "^0.14.6",
+    "react-addons-css-transition-group": "^15.3.0",
+    "react-burger-menu": "^1.10.2",
     "react-dom": "^0.14.6",
     "react-helmet": "^3.1.0",
     "react-html-parser": "^1.0.3",
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
+    "react-router-scroll": "^0.3.0",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "redux-promise-middleware": "^3.2.0",
