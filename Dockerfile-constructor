@@ -1,0 +1,10 @@
+FROM node:6.2.2
+
+COPY . /cids/development
+
+WORKDIR /cids/development
+
+RUN npm install -g webpack bower
+RUN bower install --allow-root && npm install
+
+CMD webpack --watch --progress --display-reasons

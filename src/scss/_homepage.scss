@@ -1,0 +1,104 @@
+#upd-banner{
+
+	height: 40px;
+  background: #800000;
+	padding: 0px 20px;
+
+	.up-logo-top {
+	  width: 150px;
+	  background-image: url(../img/upd.png);
+	  background-size: contain;
+	  background-position: center;
+	  background-repeat: no-repeat;
+	}
+
+	ul.pure-menu  {
+	  margin-top: 7px;
+	}
+}
+
+#main-banner {
+  height: 200px;
+  padding: 40px;
+  text-align: center;
+  background: white;
+
+	h3{
+		font-family: 'Alegreya SC';
+	  margin-top: 10px;
+		font-weight: 200;
+		font-size: 24px;
+	}
+
+	.up-logo-large {
+	  width: 60px;
+	  height: 60px;
+	  margin: auto;
+	  background: url("../img/up-logo-large.png");
+	  background-size: contain;
+	  background-repeat: no-repeat;
+	}
+}
+
+.top-bar-section ul li > a, .top-bar-section ul li > span {
+	font-size: 16px;
+	font-weight: 300;
+
+	&.active {
+		background: #800000 !important;
+		color: white !important;
+		font-weight: 500 !important;
+	}
+}
+
+.top-bar-section .dropdown li >a {
+	font-size: 14px;
+	font-weight: 300;
+}
+
+
+
+.home-posts {
+	.post-title h3 {
+		font-family: 'Alegreya SC';
+		font-weight: 200;
+		font-size: 20px;
+		line-height: 30px;
+		margin-bottom: 10px;
+	}
+
+	.date {
+		font-size: 14px;
+		color: transparentize($paragraph-color, 0.5);
+	}
+
+	.post-preview p {
+		color: transparentize($paragraph-color, 0.5);
+		font-size: 14px;
+
+	}
+}
+
+.sidebar_wrapper {
+	background-color: #800000;
+	padding: 30px;
+	color: white;
+	.post-title h3 {
+		font-family: 'Alegreya SC';
+		font-weight: 200;
+		font-size: 16px;
+		line-height: 30px;
+		margin-bottom: 10px;
+	}
+
+	.date {
+		font-size: 14px;
+		color: transparentize(white, 0.5);
+	}
+
+	.post-preview p {
+		color: transparentize(white, 0.5);
+		font-size: 14px;
+	}
+
+}
