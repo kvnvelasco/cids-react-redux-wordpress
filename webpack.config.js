@@ -15,9 +15,9 @@ module.exports = {
     app: [
       path.join(source, 'js/app.js')
     ],
-    vendor: [
-        'react', 'react-dom', 'react-burger-menu', 'radium'
-    ]
+    // vendor: [
+    //     'react', 'react-dom', 'react-burger-menu', 'radium'
+    // ]
   },
 
   resolve: {
@@ -41,11 +41,11 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style', 'css-loader!sass')
+        loader: ExtractTextPlugin.extract({fallbackLoader: 'style', loader: 'css-loader!sass'})
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css-loader')
+        loader: ExtractTextPlugin.extract({fallbackLoader: 'style', loader: 'css-loader'})
       },
       {
         test: /template\.jade/,
@@ -68,7 +68,7 @@ module.exports = {
   output: {
     path: build,
     publicPath: '/wp-content/themes/cids/',
-    filename: 'js/[name].js',
+    filename: 'js/[name]-[hash].js',
     chunkFilename: 'js/chunks/[name]-[id].js'
   },
 
@@ -87,12 +87,13 @@ module.exports = {
       // Copy Images
       {from: path.join(source, 'img/'), to: 'img/'}
     ]),
-    new ExtractTextPlugin("[name].css", {
+    new ExtractTextPlugin({
+      filename: "[name].css",
       inject: 'head',
       template: 'jade!src/index.jade'
     }),
 
-    new webpack.optimize.CommonsChunkPlugin({name: "vendor", filename: "vendor.bundle.js"}),
+    // new webpack.optimize.CommonsChunkPlugin({name: "vendor", filename: "vendor.bundle.js"}),
 
     new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')

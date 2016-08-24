@@ -39,7 +39,7 @@
 	  width: 60px;
 	  height: 60px;
 	  margin: auto;
-	  background: url("../img/up-logo-large.png");
+	  background: url(../img/up-logo-large.png);
 	  background-size: contain;
 	  background-repeat: no-repeat;
 	}
@@ -70,7 +70,88 @@
 }
 
 
+.featured-area {
+	padding-bottom: 20px;
+	box-shadow: 0 0 30px 0 #f1f1f1;
+	position: relative;
+	transition: all 0.3s linear;
+	overflow: hidden;
 
+	.featured-item {
+		float:left;
+	}
+
+	.featured-image {
+		height: 350px;
+		background-position: center center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-color: #800000;
+		background-image: url(../img/up-logo-large.png);
+	}
+
+	.feature-wrapper {
+		transition: all 0.3s ease-in;
+	}
+
+	.feature-controls {
+		position: absolute;
+		top: 115px;
+		width: 100%;
+		z-index: 1000;
+
+		div {
+			height: 60px;
+			width: 50px;
+			background: white;
+			position: relative;
+			background-position: center center;
+			background-size: 25% auto;
+			background-repeat: no-repeat;
+			cursor: pointer;
+		}
+
+		.left {
+			background-image: url(../img/chevron-left.png);
+		}
+
+		.right {
+			background-image: url(../img/chevron-right.png);
+		}
+	}
+
+	h2 {
+			margin: 10px 20px;
+			font-size: 28px;
+			font-family: 'Alegreya SC';
+			font-weight: 200;
+	}
+
+	p {
+		margin: 10px 20px;
+		font-size: 14px;
+		color: transparentize($paragraph-color, 0.5);
+	}
+}
+
+.carousel-enter {
+  transform: translateX(100%);
+	transition: all 300ms ease-in;
+}
+
+.carousel-enter.carousel-enter-active {
+	display: block;
+	transform: translateX(0);
+}
+
+.carousel-leave {
+  transform: translateX(0);
+	transition: all 300ms ease-in;
+}
+
+.carousel-leave.carousel-leave-active {
+  transform: translateX(-100%);
+}
 
 .home-posts {
 	.post-title h3 {

@@ -40,6 +40,12 @@ const getNextPage = (postAPI, page) => {
   }
 }
 
+export const moveFeatured = (type) => {
+  return dispatch => {
+    dispatch({type: 'MOVE_FEATURED', payload: {type: type}})
+  }
+}
+
 
 
 export const fetchPost = (api, slug) => {
@@ -87,11 +93,47 @@ const fetchAnnouncePosts = (api) => {
   }
 }
 
-const getMedia = (id, mediaID) => {
-  return (dispatch) => {
-    axios.get(`/wp-json/wp/v2/media/${mediaID}`)
+export const fetchFeatured = () => {
+  return dispatch => {
+    dispatch({type: 'FETCHING_FEATURED'})
+    axios.get(`/wp-json/wp/v2/tags`,
+      {
+        params: {
+          search: 'featured'
+        }
+      })
     .then( response => {
-      dispatch({type: 'GOT_FEATURED_MEDIA', payload: {id: id, media: response.data.media_details.sizes}})
+      dispatch(fetchFeaturedPosts(response.data[0].id))
+    })
+  }
+}
+
+const fetchFeaturedPosts = (tag) => {
+  return dispatch => {
+    if (tag) {
+      axios.get(`/wp-json/wp/v2/posts?tags[]=${tag}`)
+      .then( response => {
+        dispatch({type: 'FETCHED_FEATURED', payload: response.data})
+
+        response.data.map( item => {
+          if(item._links['wp:featuredmedia']){
+            dispatch(getMedia(item._links['wp:featuredmedia'][0].href, item.id))
+          }
+          return item
+        })
+
+      })
+    } else {
+      dispatch({type: 'NO_FEATURED_POSTS'})
+    }
+  }
+}
+
+const getMedia = (media_link, parent_id) => {
+  return (dispatch) => {
+    axios.get(media_link)
+    .then( response => {
+      dispatch({type: 'GOT_FEATURED_MEDIA', payload: {id: parent_id, media: response.data.media_details.sizes}})
     })
     .catch( err => {
       console.error('FAILED TO FETCH MEDIA', err)

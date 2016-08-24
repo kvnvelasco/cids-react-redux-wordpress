@@ -9,7 +9,7 @@ services:
         - constructor_data:/cids
         - .:/cids/development
         - constructor_modules:/cids/development/node_modules
-        - constructor_modules:/cids/development/bower_components
+        - constructor_bower:/cids/development/bower_components
       command: npm run dev
   wordpress:
     image: wordpress:latest
@@ -45,6 +45,7 @@ networks:
 
 volumes:
   constructor_data:
+  constructor_bower:
   constructor_modules:
   database_data:
   wordpress_apache:

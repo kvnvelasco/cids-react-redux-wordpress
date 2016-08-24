@@ -4,6 +4,8 @@ import  Parser  from 'react-html-parser'
 import {Link} from 'react-router'
 import Radium from 'radium'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import Featured from './Featured'
+
 
 import { fetchPosts, fetchAnnouncements } from '../../actions/postsActions'
 
@@ -76,9 +78,10 @@ export default class Home extends Component{
     if (!this.props.posts.postsFetched) { return <div> {spinner} </div> }
     return <div class='row'>
       {/* Posts */}
-      <section class='small-12 medium-7 large-8 columns home-page' style={{paddingTop: '50px', paddingBottom: '50px'}}>
+      <section class='small-12 medium-7 large-8 columns home-page' style={{ paddingBottom: '50px'}}>
         <h4> News and Updates </h4>
         {spinner}
+        <Featured />
         <ReactCSSTransitionGroup transitionName="page"
           transitionEnterTimeout={400} transitionLeaveTimeout={400}
           component='ul' class='medium-block-grid-1 large-block-grid-2 home-posts'>
@@ -90,7 +93,7 @@ export default class Home extends Component{
 
       {/* Sidebar */}
       <section class="small-12 medium-5 large-4 columns">
-        <div class="sidebar_wrapper" style={{paddingTop: '50px'}}>
+        <div class="sidebar_wrapper">
           <sidebar>
             <h4> Announcements </h4>
 

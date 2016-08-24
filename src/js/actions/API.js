@@ -5,18 +5,20 @@ export const getAPI = () => {
     axios.get('/wp-json')
     .then(response => {
        let routes = parseRoutes(response.data.routes)
+       console.log(response)
        dispatch({type: 'API_DISCOVERED', payload: routes})
        if(routes.menuAPI.enabled) { dispatch(discoverMenus(routes.menuAPI.url)) }
        else { dispatch({type: 'READY'})}
     })
     .catch( response => {
-      console.error('Discovery Failed')
+      console.error('Discovery Failed', response)
     })
   }
 }
 
 const discoverMenus = (data) => {
   return (dispatch) => {
+    dispatch({type: 'DISCOVERING_MENUS'})
     axios.get(data)
     .then(response => {
       response.data.forEach( menu => {
@@ -24,7 +26,7 @@ const discoverMenus = (data) => {
       })
     })
     .catch( response => {
-      console.error('Menu Discovery Failed')
+      console.error('Menu Discovery Failed', response)
     })
   }
 }

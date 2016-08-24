@@ -11,11 +11,10 @@ let Menu = require('react-burger-menu').push
 
 let RadLink = Radium(Link)
 
-
 @connect( store => {
   return {
-    loaded: store.globals.loaded,
     bootstrapped: store.globals.bootstrapped,
+    loaded: store.globals.loaded,
     menus: store.menus
   }
 })

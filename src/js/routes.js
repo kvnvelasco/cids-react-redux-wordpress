@@ -9,10 +9,6 @@ const componentFetcher = (cb) =>{
 
 const routes = [
   {
-    path: 'home(/:page)',
-    component: Home
-  },
-  {
     path: 'articles/(:slug)(/:index)',
     component: Post
   },
@@ -34,7 +30,9 @@ export default [
   {
   path: '/',
   component: Base,
-  indexRoute: { onEnter: (nextState, replace) => replace('/home') },
+  indexRoute: {
+    component: Home
+  },
   childRoutes: routes
   },
 

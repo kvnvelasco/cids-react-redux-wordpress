@@ -40,7 +40,7 @@ export default class Header extends Component{
         <div id="main-banner">
           <div class="up-logo-large">
           </div>
-            <h3> Center for Integrative Development Studies </h3>
+            <h3> Center for Integrative and Development Studies </h3>
             <p> The University of the Philippines-Center for Integrative and Development Studies (UP-CIDS) spans various perspectives,
             methodologies, and ideologies in its conduct of basic and policy-oriented research. The Center harnesses
             the University’s multidisciplinary expertise in its studies on critical fields. </p>

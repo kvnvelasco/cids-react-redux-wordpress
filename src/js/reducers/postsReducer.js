@@ -1,17 +1,36 @@
-export default function reducer(state = {postsFetched: false, fetching: true, all: [], post: {}, announcements: [], canNext: false, canPrev: false}, action) {
+const defaultState = {
+  postsFetched: false,
+  fetching: true,
+  all: [],
+  post: {},
+  featured: {
+    index: 0,
+    items: []
+  },
+  announcements: [],
+  canNext: false,
+  canPrev: false
+}
+
+export default function reducer(state = defaultState, action) {
   let announcements = state.announcements
+  let featured = state.featured
   switch (action.type) {
     case 'FETCHING_POSTS':
       return {...state, fetching: true, all: []}
     case 'FETCHED_POSTS':
       return {...state, fetching: false, postsFetched: true, all: action.payload.data, page: action.payload.page}
 
+    case 'FETCHED_FEATURED':
+      return {...state, featured: {...featured, items: action.payload}}
+
+
     case 'GOT_FEATURED_MEDIA':
     // Search through data state to find the correct one:
-      let newPosts = state.all.map( post => {
-        return post.id == action.payload.id ? {...post, media: action.payload.media}: post
+      let postsWithMedia = state.featured.items.map( post => {
+        return post.id == action.payload.id ? {...post, media: action.payload.media} : post
       })
-      return {...state, data: newPosts}
+      return {...state, featured: {...featured, items: postsWithMedia}}
 
     case 'FETCHING_POST':
       return {...state, fetching: true}
@@ -27,6 +46,11 @@ export default function reducer(state = {postsFetched: false, fetching: true, al
 
     case 'FETCHED_NEXT':
       return {...state, next: action.payload}
+
+    case 'MOVE_FEATURED':
+      let index = (action.payload.type == 'next') ? featured.index + 1 : featured.index - 1
+      // console.warn(index)
+      return {...state, featured: {...featured, index: index}}
 
     case 'FETCHING_ANNOUNCE':
       return {...state, announcements: {...announcements, fetched: false, fetching: true}}
