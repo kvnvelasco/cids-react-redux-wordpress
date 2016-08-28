@@ -8,7 +8,6 @@ export const getAPI = () => {
        dispatch({type: 'API_DISCOVERED', payload: routes})
        if(routes.menuAPI.enabled) { dispatch(discoverMenus(routes.menuAPI.url)) }
        else { dispatch({type: 'READY'})}
-       console.log(response.data.routes)
     })
     .catch( response => {
       console.error('Discovery Failed', response)
