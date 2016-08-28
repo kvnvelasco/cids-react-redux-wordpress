@@ -18,6 +18,7 @@ export default function reducer(state = defaultState, action) {
   switch (action.type) {
     case 'FETCHING_POSTS':
       return {...state, fetching: true, all: []}
+
     case 'FETCHED_POSTS':
       return {...state, fetching: false, postsFetched: true, all: action.payload.data, page: action.payload.page}
 

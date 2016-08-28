@@ -58,7 +58,6 @@ export default class Featured extends Component {
     let width = `${nextProps.featured.items.length ?  nextProps.featured.items.length * 100 : 100}%`
     let componentWidth = nextProps.featured.items.length ? 100/nextProps.featured.items.length : 100
     let translateX = nextProps.featured.index * componentWidth
-    console.log(nextProps)
 
     this.style = {...this.style,
         wrapper: {...this.style.wrapper, width: width, transform: `translateX(-${translateX}%)`},

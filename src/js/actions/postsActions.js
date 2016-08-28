@@ -13,7 +13,7 @@ export const fetchPosts = (postAPI, page) => {
       }
     })
     .then( response => {
-      dispatch({type: 'FETCHED_POSTS', payload: {data: parsePost(response.data, dispatch), page: page} })
+      dispatch({type: 'FETCHED_POSTS', payload: {data:response.data, page: page}})
       dispatch(getNextPage(postAPI, page))
     })
     .catch( err => {
@@ -33,7 +33,7 @@ const getNextPage = (postAPI, page) => {
     .then( response => {
       if(response.data.length == 0){dispatch({type: 'CAN_NEXT', payload: false})}
       else {
-        dispatch({type: 'FETCHED_NEXT', payload: parsePost(response.data)})
+        dispatch({type: 'FETCHED_NEXT', payload: response.data})
         dispatch({type: 'CAN_NEXT', payload: true})
       }
     })
@@ -54,7 +54,7 @@ export const fetchPost = (api, slug) => {
     axios.get(`${api}?slug=${slug}`)
     .then(response => {
       if (response.data.length > 0) {
-        dispatch({type: 'FETCHED_POST', payload: parsePost(response.data, dispatch)[0]})
+        dispatch({type: 'FETCHED_POST', payload: response.data[0]})
       } else {
         dispatch({type: 'FETCHED_POST', payload: null})
       }
@@ -85,7 +85,7 @@ const fetchAnnouncePosts = (api) => {
   return dispatch => {
     axios.get(`${api}&per_page=4`)
     .then( response => {
-      dispatch({type: 'FETCHED_ANNOUNCE', payload: parsePost(response.data, dispatch) })
+      dispatch({type: 'FETCHED_ANNOUNCE', payload: response.data, dispatch})
     })
     .catch( err => {
       console.error('FAILED TO FETCH ANNOUNCE DOWNSTREAM', err)
@@ -139,21 +139,4 @@ const getMedia = (media_link, parent_id) => {
       console.error('FAILED TO FETCH MEDIA', err)
     })
   }
-}
-
-
-export const parsePost = (data) => {
-  let posts = data.map( post => {
-    return {
-      id: post.id,
-      slug: post.slug,
-      date: moment(new Date(post.date)).format('Do MMM YYYY'),
-      title: post.title.rendered,
-      link: post.link,
-      meta: post._links,
-      content: post.content.rendered,
-      preview: post.excerpt.rendered
-    }
-  })
-  return posts
 }

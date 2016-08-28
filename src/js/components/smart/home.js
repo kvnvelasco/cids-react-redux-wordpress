@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import  Parser  from 'react-html-parser'
+
 import {Link} from 'react-router'
-import Radium from 'radium'
+
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Featured from './Featured'
-
+import Post from '../dumb/post'
 
 import { fetchPosts, fetchAnnouncements } from '../../actions/postsActions'
 
-let RadLink = Radium(Link)
+
+
 
 @connect(store => {
   return {
@@ -45,30 +47,12 @@ export default class Home extends Component{
     this.props.history.push(`/${this.props.location.pathname.split('/')[1]}/${this.props.posts.page - 1}`)
   }
 
-  parsePosts(data) {
-    if(data.length == 0) {return <div />}
-    let posts = data.all.map( (post, index) => {
-      return <li key={post.id}>
-        <div class='post-title'>
-          <RadLink to={`/${post.slug}`} >
-            <h3 dangerouslySetInnerHTML={{__html: post.title}} />
-          </RadLink>
-        <span class='date'> {post.date} </span>
-        </div>
-        <div class='post-preview'>
-          <div  dangerouslySetInnerHTML={{__html: post.preview.replace('[&hellip;]', '...')}}  />
-          <RadLink to={`/articles/${post.slug}/${index}`}>
-            <span> Read more </span>
-          </RadLink>
-        </div>
-      </li>
-    })
-    return posts
-  }
+
+
 
   render() {
-    let posts = this.parsePosts(this.props.posts)
-    let announcements = !this.props.posts.announcements.fetching ? this.parsePosts(this.props.announcements) : null
+    let posts = this.props.posts.all.length ? this.props.posts.all.map( item => <Post key={item.id} post={item} />) : null
+    let announcements = this.props.posts.announcements.all ? this.props.posts.announcements.all.map( item => <Post key={item.id} post={item} />) : null
     let spinner = this.props.posts.fetching ? <div class='uil-ring-css'><div></div></div> : null
     let next = this.props.posts.canNext ? <div onClick={this.next.bind(this)}> {'Next >'} </div> : null
     let prev = this.props.posts.canPrev ? <div onClick={this.prev.bind(this)}> {'< Previous'} </div> : null

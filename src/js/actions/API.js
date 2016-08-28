@@ -5,10 +5,10 @@ export const getAPI = () => {
     axios.get('/wp-json')
     .then(response => {
        let routes = parseRoutes(response.data.routes)
-       console.log(response)
        dispatch({type: 'API_DISCOVERED', payload: routes})
        if(routes.menuAPI.enabled) { dispatch(discoverMenus(routes.menuAPI.url)) }
        else { dispatch({type: 'READY'})}
+       console.log(response.data.routes)
     })
     .catch( response => {
       console.error('Discovery Failed', response)

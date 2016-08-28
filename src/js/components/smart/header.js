@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import HorizontalMenu from '../dumb/horizontalMenu'
 
 import { openMenu } from '../../actions/menuActions'
-
+import Search from '../dumb/Search.js'
 
 
 @connect(store => {
@@ -47,9 +47,13 @@ export default class Header extends Component{
         </div>
       </header>
       <nav class='nav-primary row'>
-        {/* <div class='columns small-1'> <Link to='/'><div class='home-button'> {' '} </div> </Link> </div> */}
-        <div onClick={this.openBurger.bind(this)} class='columns small-6 medium-3 large-2 end'>
-          <div class='menu-button'> Menu </div>
+        <div class="large-10 small-12 columns small-centered">
+          <div class='row' >
+            <div onClick={this.openBurger.bind(this)} class='columns small-6 medium-3 large-3'>
+              <div class='menu-button'> Menu </div>
+            </div>
+            <Search class='columns small-6 medium-3 large-4' dispatch={this.props.dispatch}/>
+          </div>
         </div>
       </nav>
 

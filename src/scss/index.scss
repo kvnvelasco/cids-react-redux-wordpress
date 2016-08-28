@@ -114,3 +114,28 @@ a {
     }
   }
 }
+
+.search-button {
+  background: transparent;
+  padding: 17px 0;
+  cursor: pointer;
+
+  &:hover{
+    background: transparent;
+  }
+
+  &:before {
+    height: 25px;
+    width: 25px;
+    background: url('../img/search.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: '';
+    float: left;
+  },
+  &:focus, &:active {
+    background: transparent;
+    outline: none;
+  }
+}
