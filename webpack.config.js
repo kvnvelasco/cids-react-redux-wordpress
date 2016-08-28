@@ -88,7 +88,7 @@ module.exports = {
       {from: path.join(source, 'img/'), to: 'img/'}
     ]),
     new ExtractTextPlugin({
-      filename: "[name].css",
+      filename: "[name]-[hash].css",
       inject: 'head',
       template: 'jade!src/index.jade'
     }),
