@@ -6,3 +6,7 @@ React + redux.
 
 To start the project, install the latest docker you can get your hands on and 
 `docker-compose up`
+
+The site is currently up at 
+
+https://cids.up.edu.ph
