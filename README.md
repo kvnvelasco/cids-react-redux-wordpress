@@ -9,4 +9,4 @@ To start the project, install the latest docker you can get your hands on and
 
 The site is currently up at 
 
-https://cids.up.edu.ph
+http://cids.up.edu.ph
